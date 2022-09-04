@@ -1,0 +1,77 @@
+{% extends 'WebPage/base.html' %}
+
+
+
+{% block lista_productos %}
+
+
+<div class="container " style = "min-width:90vw;">
+    <div class="row justify-content-center">
+        <table width = "100%" border = "0">
+            <form method="get">  
+            <tr><td align = "right" width = "50%" valign = "bottom">        
+            {{ formulario.as_p }}
+        </td><td align = "left" valign = "middle"><input type="submit" value= "Buscar" class = "buttonestilo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+         <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+         <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+        </svg></form> 
+        </center> 
+        </td></tr>
+        <tr><td colspan = "2">&nbsp; </td></tr>
+        </table>
+     
+    </div>
+</div>
+ 
+
+{% for producto in productos %}
+
+<div class="col mb-5">
+    <div class="card h-100">
+        <!-- Product image-->
+        <img class="card-img-top" src="/media/{{producto.imagen}}" alt="..." />
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">{{producto.nombre}}</h5>
+                <!-- Product price-->
+                {{producto.modelo}}
+               
+            </div>
+        
+           
+            <br>
+            <center>
+                    <a href="{% url 'detalle_producto' producto.id  %}" style = "text-decoration:none;">
+                    <img src = "/media/icons/ver.png" width="20vw">
+                    </a> 
+                
+                    <a href="{% url 'borrar_producto' producto.id  %}" style = "text-decoration:none;">
+                    <img src = "/media/icons/borrar.png" width="20vw">
+                    </a>
+                
+                    <a href="{% url 'editar_producto' producto.id  %}" style = "text-decoration:none;">
+                    <img src = "/media/icons/editar.png" width="20vw">
+                    </a>
+            </center>
+
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<div style = "min-width:90vw;"> <center>
+
+<a class="buttonestilo" href="{% url 'carga_productos' %}" role="button" type="submit" > Cargar nuevo producto </a>
+
+</div>
+</center>
+
+{% endblock lista_productos %}
